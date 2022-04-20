@@ -12,7 +12,7 @@ namespace TestCoreCaching.Controllers
         {
             int x = 0;
             int y = 1;
-            CacheModel.Add("sum", x + y);
+            CacheModel<object>.Add(1, x + y);
         }
     }
 }

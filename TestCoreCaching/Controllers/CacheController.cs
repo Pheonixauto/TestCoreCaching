@@ -10,7 +10,7 @@ namespace TestCoreCaching.Controllers
         [HttpGet("GetCache")]
         public int Get()
         {
-            return CacheModel.Get("sum");
+            return CacheModel<object>.Get(1);
         }
     }
 }

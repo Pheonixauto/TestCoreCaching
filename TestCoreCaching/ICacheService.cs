@@ -3,7 +3,7 @@
     public interface ICacheService
     {
         void Add<T>(string cacheKey, T value);
-        void Delete<T>(string cacheKey);
-        int Get<T>(string cacheKey);
+        void Delete(string cacheKey);
+        T Get<T>(string cacheKey);
     }
 }

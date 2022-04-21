@@ -13,12 +13,16 @@ namespace TestCoreCaching.Controllers
             _cacheModel = cacheModel;
         }
         [HttpGet("GetCache")]
-        public int Get()
+        public IActionResult Get(string a)
         {
             var cache = _cacheModel.Get<string>("test");
-            var increaCache = cache + 1;
+            if(cache == null)
+            {
+                return NotFound();
+            }
+            var increaCache = cache + a;
             _cacheModel.Add("test", increaCache);
-            return increaCache;
+            return Ok(increaCache);
         }
     }
 }

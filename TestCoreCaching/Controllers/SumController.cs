@@ -13,11 +13,9 @@ namespace TestCoreCaching.Controllers
             _cacheModel = cacheModel;
         }
         [HttpGet("sum")]
-        public void Sum()
-        {
-            int x = 0;
-            int y = 1;
-            _cacheModel.Add("test", x + y);
+        public void Sum(string a)
+        {          
+                _cacheModel.Add("test", a);          
         }
     }
 }

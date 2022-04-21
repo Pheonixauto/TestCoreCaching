@@ -7,10 +7,18 @@ namespace TestCoreCaching.Controllers
     [ApiController]
     public class CacheController : ControllerBase
     {
+        private readonly ICacheService _cacheModel;
+        public CacheController(ICacheService cacheModel)
+        {
+            _cacheModel = cacheModel;
+        }
         [HttpGet("GetCache")]
         public int Get()
         {
-            return CacheModel<object>.Get(1);
+            var cache = _cacheModel.Get<string>("test");
+            var increaCache = cache + 1;
+            _cacheModel.Add("test", increaCache);
+            return increaCache;
         }
     }
 }

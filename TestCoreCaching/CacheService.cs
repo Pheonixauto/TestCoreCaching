@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Caching.Memory;
+﻿using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Caching.Memory;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -7,6 +8,7 @@ namespace TestCoreCaching
     public class CacheService : ICacheService
     {
         private IMemoryCache _memoryCache = new MemoryCache(new MemoryCacheOptions());
+        
         public CacheService(IMemoryCache memoryCache)
         {
             _memoryCache = memoryCache;
@@ -30,8 +32,8 @@ namespace TestCoreCaching
                 T re = JsonSerializer.Deserialize<T>(r)!;
                 return re;
             }
-            var not = "null";
-            return  JsonSerializer.Deserialize<T>(not)!;
+            return default!;
+
         }
         public void Delete(string cacheKey)
         {

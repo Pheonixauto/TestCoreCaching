@@ -45,31 +45,31 @@ namespace TestCoreCaching.CacheServer
         public T Get<T>(string cacheKey)
         {
             var b = _configuration.GetValue<string>("RedisCacheServerUrl");
-            if (b != null)
+            //memory
+            var result = _memoryCache.Get(cacheKey);
+            if (result != null)
             {
-                // redis
-
-                var result = _distributedCache.Get(cacheKey);
-                if (result != null)
-                {
-                    var cachedDataString = Encoding.UTF8.GetString(result);
-                    var cachedDataString1 = JsonConvert.DeserializeObject<T>(cachedDataString);
-                    return cachedDataString1;
-                }
-                return default!;
+                var r = JsonConvert.SerializeObject(result);
+                T re = JsonConvert.DeserializeObject<T>(r)!;
+                return re;
             }
             else
             {
-                //memory
-                var result = _memoryCache.Get(cacheKey);
-                if (result != null)
+                if (b != null)
                 {
-                    var r = JsonConvert.SerializeObject(result);
-                    T re = JsonConvert.DeserializeObject<T>(r)!;
-                    return re;
-                }
+                    // redis
+                    var result1 = _distributedCache.Get(cacheKey);
+                    if (result1 != null)
+                    {
+                        var cachedDataString = Encoding.UTF8.GetString(result1);
+                        var cachedDataString1 = JsonConvert.DeserializeObject<T>(cachedDataString);
+                        return cachedDataString1;
+                    }
+                    return default!;
+                }             
                 return default!;
             }
+
         }
         public void Delete(string cacheKey)
         {
@@ -77,7 +77,6 @@ namespace TestCoreCaching.CacheServer
             if (b != null)
             {
                 _distributedCache.Remove(cacheKey);
-
             }
             else
             {

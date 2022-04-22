@@ -7,8 +7,8 @@ namespace TestCoreCaching.Controllers
     [ApiController]
     public class CacheController : ControllerBase
     {
-        private readonly ICacheService _cacheModel;
-        public CacheController(ICacheService cacheModel)
+        private readonly ICacheMemory _cacheModel;
+        public CacheController(ICacheMemory cacheModel)
         {
             _cacheModel = cacheModel;
         }

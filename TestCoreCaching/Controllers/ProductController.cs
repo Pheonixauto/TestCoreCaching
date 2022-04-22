@@ -29,6 +29,7 @@ namespace TestCoreCaching.Controllers
         {
             var cacheKey = "test";
             string product = "car";
+           
 
             var cacheData = distributedCacheService.Get<string>(cacheKey);
             if (cacheData != null)

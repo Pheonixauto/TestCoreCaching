@@ -9,13 +9,18 @@ namespace TestCoreCaching.DistributedCache
     public class DistributedCacheService : IDistributedCacheService
     {
         private readonly IDistributedCache distributedCache;
+        private readonly IConfiguration _configuration;
 
-        public DistributedCacheService(IDistributedCache distributedCache)
+        public DistributedCacheService(IDistributedCache distributedCache, IConfiguration configuration)
         {
             this.distributedCache = distributedCache;
+            this._configuration = configuration;
         }
         public  void Add<T>(string cacheKey, T value)
         {
+           
+            var b = _configuration.GetValue<string>("RedisCacheServerUrl");
+
             var cacheExpriOption = new DistributedCacheEntryOptions()
             {
                 AbsoluteExpiration = DateTime.Now.AddSeconds(20),

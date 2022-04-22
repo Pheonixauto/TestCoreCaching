@@ -5,11 +5,11 @@ using System.Text.Json.Serialization;
 
 namespace TestCoreCaching
 {
-    public class CacheService : ICacheService
+    public class CacheMemory : ICacheMemory
     {
         private IMemoryCache _memoryCache = new MemoryCache(new MemoryCacheOptions());
         
-        public CacheService(IMemoryCache memoryCache)
+        public CacheMemory(IMemoryCache memoryCache)
         {
             _memoryCache = memoryCache;
         }

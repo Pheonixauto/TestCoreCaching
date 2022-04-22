@@ -1,4 +1,5 @@
 using TestCoreCaching;
+using TestCoreCaching.CacheServer;
 using TestCoreCaching.DistributedCache;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,9 +16,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddMemoryCache();
-builder.Services.AddScoped<ICacheService, CacheService>();
+builder.Services.AddScoped<ICacheMemory, CacheMemory>();
 builder.Services.AddScoped<IDistributedCacheService, DistributedCacheService>();
-
+builder.Services.AddScoped<ICacheService, CacheService>();
 
 var app = builder.Build();
 

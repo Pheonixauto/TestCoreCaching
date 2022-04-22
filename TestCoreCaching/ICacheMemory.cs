@@ -1,6 +1,6 @@
 ﻿namespace TestCoreCaching
 {
-    public interface ICacheService
+    public interface ICacheMemory
     {
         void Add<T>(string cacheKey, T value);
         void Delete(string cacheKey);

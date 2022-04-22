@@ -7,8 +7,8 @@ namespace TestCoreCaching.Controllers
     [ApiController]
     public class SumController : ControllerBase
     {
-        private readonly ICacheService _cacheModel;
-        public SumController(ICacheService cacheModel)
+        private readonly ICacheMemory _cacheModel;
+        public SumController(ICacheMemory cacheModel)
         {
             _cacheModel = cacheModel;
         }
